@@ -1,0 +1,30 @@
+{
+  "name": "phpindd/cqrs-newsletter-double-opt-in",
+  "description": "Example for a newsletter double opt-in implementation using CQRS",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Holger Woltersdorf",
+      "email": "hw@hollo.me"
+    }
+  ],
+  "support": {
+    "email": "hw@hollo.me",
+    "source": "https://github.com/PHPinDD/cqrs-newsletter-double-opt-in"
+  },
+  "require": {
+    "php": ">=5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "hollodotmet\\CqrsNewsletter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "hollodotme\\CqrsNewsletter\\Tests\\Unit\\": "tests/Unit/"
+    }
+  }
+}
