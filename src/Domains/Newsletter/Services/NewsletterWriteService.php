@@ -85,16 +85,22 @@ final class NewsletterWriteService implements NewsletterWriteServiceInterface
 	}
 
 	/**
-	 * @param SubscriptionId $subscriptionId
+	 * @param string $email
 	 *
 	 * @throws SubscriptionAlreadyConfirmed
 	 * @throws SubscriptionNotFound
+	 * @throws SendingConfirmationMailFailed
+	 * @throws EmailAddressIsNotValid
+	 *
+	 * @return SubscriptionInterface
 	 */
-	public function resendConfirmationMail( SubscriptionId $subscriptionId )
+	public function resendConfirmationMail( $email )
 	{
+		$this->guardEmailIsValid( $email );
+
 		$subscriptionRepository = new SubscriptionRepository();
 
-		$subscription = $subscriptionRepository->findOneById( $subscriptionId );
+		$subscription = $subscriptionRepository->findOneByEmail( $email );
 
 		if ( $subscription->getStatus() == Subscription::STATUS_CONFIRMED )
 		{
@@ -102,6 +108,8 @@ final class NewsletterWriteService implements NewsletterWriteServiceInterface
 		}
 
 		$this->sendConfirmationMail( $subscription );
+
+		return $subscription;
 	}
 
 	/**

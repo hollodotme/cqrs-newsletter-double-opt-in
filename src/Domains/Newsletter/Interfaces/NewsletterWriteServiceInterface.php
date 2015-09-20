@@ -42,13 +42,16 @@ interface NewsletterWriteServiceInterface
 	public function sendConfirmationMail( SubscriptionInterface $subscription );
 
 	/**
-	 * @param SubscriptionId $subscriptionId
+	 * @param string $email
 	 *
 	 * @throws SubscriptionNotFound
 	 * @throws SubscriptionAlreadyConfirmed
 	 * @throws SendingConfirmationMailFailed
+	 * @throws EmailAddressIsNotValid
+	 *
+	 * @return SubscriptionInterface
 	 */
-	public function resendConfirmationMail( SubscriptionId $subscriptionId );
+	public function resendConfirmationMail( $email );
 
 	/**
 	 * @param SubscriptionId $subscriptionId

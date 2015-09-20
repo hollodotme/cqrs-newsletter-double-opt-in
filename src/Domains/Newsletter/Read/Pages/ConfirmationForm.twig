@@ -1,0 +1,51 @@
+{% extends "Theme.twig" %}
+
+{% block page_title %}
+    <title>Confirmation form</title>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            Confirmation form
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+
+        <h1>Confirmation form</h1>
+
+        <p class="lead">
+            Please confirm your subscription to our newsletter with the e-mail address:
+        </p>
+
+        <p class="lead">
+            <b>{{ subscription.getEmail }}</b>
+        </p>
+
+        <hr>
+
+        <form action="/newsletter/confirm-subscription" method="post" role="form">
+            <input type="hidden" name="subscriptionId" value="{{ subscription.getSubscriptionId }}">
+
+            <div class="form-group-lg">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary btn-lg">Confirm subscription</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
