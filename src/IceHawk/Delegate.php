@@ -32,7 +32,7 @@ final class Delegate extends IceHawkDelegate
 		ini_set( 'session.gc_maxlifetime', 60 * 60 * 24 );
 
 		# Cookie settings
-		session_set_cookie_params( 60 * 60 * 24, '/', '.cqrs-newsltter.de', false, true );
+		session_set_cookie_params( 60 * 60 * 24, '/', '.cqrs-newsletter.de', false, true );
 
 		session_start();
 	}

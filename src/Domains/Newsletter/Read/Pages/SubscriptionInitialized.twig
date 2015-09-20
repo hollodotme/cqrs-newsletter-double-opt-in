@@ -1,0 +1,46 @@
+{% extends "Theme.twig" %}
+
+{% block page_title %}
+    <title>Subscription initialzed</title>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            Subscription initialized
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>Subscription initialized</h1>
+
+        <p class="lead">
+            Thank you for subscribing to our newsletter!
+        </p>
+
+        <p class="lead">
+            We sent a confirmation e-mail to: <b>{{ subscription.getEmail }}</b>
+        </p>
+
+        <p>
+            Please check your mail account.
+        </p>
+
+        <p>
+            <a href="/newsletter/show-resend-confirmation-form">
+                You can resend this confirmation e-mail here.
+            </a>
+        </p>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

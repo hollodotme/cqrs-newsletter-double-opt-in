@@ -16,14 +16,29 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\SubscriptionId;
 interface SubscriptionInterface
 {
 	/**
+	 * @param SubscriptionId $subscriptionId
+	 */
+	public function setSubscriptionId( SubscriptionId $subscriptionId );
+
+	/**
 	 * @return SubscriptionId
 	 */
 	public function getSubscriptionId();
 
 	/**
+	 * @param string $email
+	 */
+	public function setEmail( $email );
+
+	/**
 	 * @return string
 	 */
 	public function getEmail();
+
+	/**
+	 * @param string $status
+	 */
+	public function setStatus( $status );
 
 	/**
 	 * @return string

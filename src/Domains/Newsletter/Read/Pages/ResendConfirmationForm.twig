@@ -1,0 +1,55 @@
+{% extends "Theme.twig" %}
+
+{% block page_title %}
+    <title>Resend confirmation e-mail form</title>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            Resend confirmation e-mail form
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>Resend confirmation e-mail form</h1>
+
+        <p class="lead">
+            Nullam quis risus eget urna mollis ornare vel eu leo. Nulla vitae elit libero,
+            a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+
+        <form role="form" action="/newsletter/resend-confirmation-mail" method="post">
+            <div class="form-group-lg{% if feedback.severity %} has-{{ feedback.severity }}{% endif %}">
+                <label class="control-label" for="email-input">Your e-mail address</label>
+
+                <div class="input-group">
+                    <input type="email" class="form-control" name="email" value="{{ feedback.email|default('') }}"
+                           placeholder="you@example.com" id="email-input">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-lg">Resend e-mail</button>
+                    </span>
+                </div>
+            </div>
+            {% if feedback.messages %}
+                <div class="alert alert-{{ feedback.alertSeverity }}">
+                    {% for message in feedback.messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>
+
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

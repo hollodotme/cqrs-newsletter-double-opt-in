@@ -39,7 +39,7 @@ final class Subscription implements SubscriptionInterface
 	/**
 	 * @param SubscriptionId $subscriptionId
 	 */
-	public function setSubscriptionId( $subscriptionId )
+	public function setSubscriptionId( SubscriptionId $subscriptionId )
 	{
 		$this->subscriptionId = $subscriptionId;
 	}
