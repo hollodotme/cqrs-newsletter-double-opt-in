@@ -15,16 +15,18 @@
     "source": "https://github.com/PHPinDD/cqrs-newsletter-double-opt-in"
   },
   "require": {
-    "php": ">=5.5"
+    "php": ">=5.5",
+    "fortuneglobe/icehawk": "dev-master",
+    "twig/twig": "@stable"
   },
   "autoload": {
     "psr-4": {
-      "hollodotmet\\CqrsNewsletter\\": "src/"
+      "PHPinDD\\CqrsNewsletter\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "hollodotme\\CqrsNewsletter\\Tests\\Unit\\": "tests/Unit/"
+      "PHPinDD\\CqrsNewsletter\\Tests\\Unit\\": "tests/Unit/"
     }
   }
 }

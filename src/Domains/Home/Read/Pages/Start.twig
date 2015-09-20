@@ -1,0 +1,35 @@
+{% extends "Theme.twig" %}
+
+{% block page_title %}
+    <title>Home</title>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block breadcrumb %}
+
+    <ul class="breadcrumb">
+        <li class="active">Home</li>
+    </ul>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>CQRS newsletter double opt-in example</h1>
+
+        <p class="lead">
+            This example demonstrates a simple newsletter double opt-in subscription process.
+        </p>
+
+        <p>
+            <a href="/newsletter/show-subscription-form" class="btn btn-primary btn-lg">
+                Let's go!
+            </a>
+        </p>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

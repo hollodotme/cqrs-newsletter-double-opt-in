@@ -1,0 +1,37 @@
+{% extends "Theme.twig" %}
+
+{% block page_title %}
+    <title>Error</title>
+{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li class="active">
+            Error
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <h1>Whoops! Something went wrong...</h1>
+
+        <p class="lead">
+            {{ errorMessage }}
+        </p>
+
+        <p>
+            <a href="/" class="btn btn-primary btn-lg">Start here</a>
+        </p>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
