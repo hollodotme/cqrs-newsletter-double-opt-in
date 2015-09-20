@@ -4,21 +4,21 @@ Example for a newsletter double opt-in implementation using CQRS
 
 ## The default newsletter double opt-in subscription process
 
-1. The `user` initializes a subscripton by entering his e-mail address in a form an submitting the form.
-2. The `application` checks the e-mail address for validity, an existing subscription and its activation status. 
-     1. If the e-mail address is valid and does not exists, the `application` will send a confirmation e-mail to the `user`.
+1. The `user` initializes a subscripton by entering his e-mail address in a form and submitting the form.
+2. The `application` checks the e-mail address for validity, an existing subscription and its confirmation status. 
+     1. If the e-mail address is valid and does not exist, the `application` will send a confirmation e-mail to the `user`.
      2. If the e-mail address is invalid, the `application` will respond with an error message to the `user`.
-     3. If the e-mail address already exists and its activation status is "not confirmed", the `application` will respond with a hint message to the `user` and will provide a way to resend the confirmation e-mail to the `user`.
-     4. If the e-mail address already exists and its activation status is "confirmed", the `application` will respond with a hint message to the `user`.
+     3. If the e-mail address already exists and its confirmation status is "initialized", the `application` will respond with a hint message to the `user` and will provide a way to resend the confirmation e-mail to the `user`.
+     4. If the e-mail address already exists and its confirmation status is "confirmed", the `application` will respond with a hint message to the `user`.
 3. The `user` klicks the confirmation link from the confirmation e-mail the `application` sent.
-4. The `application` will update the subscription status from "not confirmed" to "confirmed" and send a welcome e-mail to the `user`.
+4. The `application` will update the subscription status from "initialized" to "confirmed" and send a welcome e-mail to the `user`.
 
 ## User Interface
 
 What the `application` needs to present to the `user`:
 
 1. Show a subscription form
-2. Depending on the validity and the existence/subsciption status of the e-mail address:
+2. Depending on the validity and the existence/confirmation status of the e-mail address:
     1. Send a confirmation e-mail to the `user` and show a "Thank you, subscription initialized" page.
     2. Show the subscription form again with an error message.
     3. Show the subscription form again with a hint message and a button to resend the cofirmation e-mail.
