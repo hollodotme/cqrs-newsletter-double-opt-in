@@ -11,7 +11,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\EmailAddressIsNotValid;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\SendingConfirmationMailFailed;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\SubscriptionAlreadyConfirmed;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\SubscriptionNotFound;
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Interfaces\NewsletterWriteServiceInterface;
+use PHPinDD\CqrsNewsletter\Domains\Newsletter\Interfaces\NewsletterMailServiceInterface;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\Commands\ResendConfirmationMailCommand;
 
 /**
@@ -21,15 +21,15 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\Commands\ResendConfirmationM
  */
 final class ResendConfirmationMailCommandHandler
 {
-	/** @var NewsletterWriteServiceInterface */
-	private $newsletterWriteService;
+	/** @var NewsletterMailServiceInterface */
+	private $newsletterMailService;
 
 	/**
-	 * @param NewsletterWriteServiceInterface $newsletterWriteService
+	 * @param NewsletterMailServiceInterface $newsletterMailService
 	 */
-	public function __construct( NewsletterWriteServiceInterface $newsletterWriteService )
+	public function __construct( NewsletterMailServiceInterface $newsletterMailService )
 	{
-		$this->newsletterWriteService = $newsletterWriteService;
+		$this->newsletterMailService = $newsletterMailService;
 	}
 
 	/**
@@ -39,7 +39,7 @@ final class ResendConfirmationMailCommandHandler
 	{
 		try
 		{
-			$subscription = $this->newsletterWriteService->resendConfirmationMail( $command->getEmail() );
+			$subscription = $this->newsletterMailService->resendConfirmationMail( $command->getEmail() );
 
 			unset($_SESSION['show-resend-confirmation-form']);
 

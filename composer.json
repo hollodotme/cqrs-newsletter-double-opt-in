@@ -16,7 +16,7 @@
   },
   "require": {
     "php": ">=5.5",
-    "fortuneglobe/icehawk": "dev-master",
+    "fortuneglobe/icehawk": "1.3.0",
     "twig/twig": "@stable"
   },
   "autoload": {

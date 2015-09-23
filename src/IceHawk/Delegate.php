@@ -7,7 +7,7 @@
 namespace PHPinDD\CqrsNewsletter\IceHawk;
 
 use Fortuneglobe\IceHawk\IceHawkDelegate;
-use PHPinDD\CqrsNewsletter\Responses\TwigPage;
+use Fortuneglobe\IceHawk\Responses\Redirect;
 
 /**
  * Class Delegate
@@ -16,14 +16,14 @@ use PHPinDD\CqrsNewsletter\Responses\TwigPage;
  */
 final class Delegate extends IceHawkDelegate
 {
-	public function configureErrorHandling()
+	public function setUpErrorHandling()
 	{
 		# Report and display all errors
 		error_reporting( E_ALL );
 		ini_set( 'display_errors', 1 );
 	}
 
-	public function configureSession()
+	public function setUpSessionHandling()
 	{
 		# Redis session handler
 		ini_set( 'session.name', 'cqrsnlsid' );
@@ -37,6 +37,9 @@ final class Delegate extends IceHawkDelegate
 		session_start();
 	}
 
+	/**
+	 * @param \Exception $exception
+	 */
 	public function handleUncaughtException( \Exception $exception )
 	{
 		try
@@ -45,10 +48,8 @@ final class Delegate extends IceHawkDelegate
 		}
 		catch ( \Exception $e )
 		{
-			$errorMessage = sprintf( 'Exception %s thrown with message: %s', get_class( $e ), $e->getMessage() );
-			$errorPage    = new TwigPage( 'Error.twig', [ 'errorMessage' => $errorMessage ], 500 );
-
-			$errorPage->respond();
+			$redirect = new Redirect( '/error/internal-server-error' );
+			$redirect->respond();
 		}
 	}
 }
