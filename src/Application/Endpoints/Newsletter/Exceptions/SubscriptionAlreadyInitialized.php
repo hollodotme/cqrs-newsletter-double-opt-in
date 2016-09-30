@@ -9,7 +9,7 @@ namespace PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions;
 /**
  * Class SubscriptionAlreadyInitialized
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Exceptions
  */
 final class SubscriptionAlreadyInitialized extends \Exception
 {

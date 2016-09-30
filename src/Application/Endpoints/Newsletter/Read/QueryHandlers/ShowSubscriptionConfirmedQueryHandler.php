@@ -12,7 +12,7 @@ use PHPinDD\CqrsNewsletter\Responses\Page;
 /**
  * Class ShowSubscriptionConfirmedQueryHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\QueryHandlers
  */
 final class ShowSubscriptionConfirmedQueryHandler
 {
@@ -21,7 +21,7 @@ final class ShowSubscriptionConfirmedQueryHandler
 	 */
 	public function handle( ShowSubscriptionConfirmedQuery $query )
 	{
-		$page = new Page( 'Newsletter/Read/Pages/SubscriptionConfirmed.twig', [ ] );
+		$page = new Page( 'Subscription/Read/Pages/SubscriptionConfirmed.twig', [ ] );
 		$page->respond();
 	}
 }

@@ -16,7 +16,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\Commands\ConfirmSubscription
 /**
  * Class ConfirmSubscriptionRequestHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Write
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Write
  */
 final class ConfirmSubscriptionRequestHandler extends PostRequestHandler
 {

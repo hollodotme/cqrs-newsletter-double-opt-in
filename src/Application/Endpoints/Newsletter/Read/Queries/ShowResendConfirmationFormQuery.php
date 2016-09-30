@@ -11,7 +11,7 @@ use Fortuneglobe\IceHawk\DomainQuery;
 /**
  * Class ShowResendConfirmationFormQuery
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\Queries
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\Queries
  */
 final class ShowResendConfirmationFormQuery extends DomainQuery
 {

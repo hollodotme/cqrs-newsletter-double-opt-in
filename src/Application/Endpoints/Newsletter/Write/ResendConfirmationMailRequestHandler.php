@@ -15,7 +15,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\Commands\ResendConfirmationM
 /**
  * Class ResendConfirmationMailRequestHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Write
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Write
  */
 final class ResendConfirmationMailRequestHandler extends PostRequestHandler
 {

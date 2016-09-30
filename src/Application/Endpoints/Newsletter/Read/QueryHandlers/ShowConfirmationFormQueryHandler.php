@@ -18,7 +18,7 @@ use PHPinDD\CqrsNewsletter\Responses\Page;
 /**
  * Class ShowConfirmationFormQueryHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\QueryHandlers
  */
 final class ShowConfirmationFormQueryHandler
 {
@@ -49,7 +49,7 @@ final class ShowConfirmationFormQueryHandler
 			}
 
 			$page = new Page(
-				'Newsletter/Read/Pages/ConfirmationForm.twig',
+				'Subscription/Read/Pages/ConfirmationForm.twig',
 				[
 					'subscription' => $subscription,
 				]

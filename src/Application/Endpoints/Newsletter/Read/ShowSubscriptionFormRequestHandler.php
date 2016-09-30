@@ -1,34 +1,33 @@
-<?php
+<?php declare(strict_types = 1);
 /**
- *
  * @author h.woltersdorf
  */
 
-namespace PHPinDD\CqrsNewsletter\Domains\Newsletter\Read;
+namespace PHPinDD\CqrsNewsletter\Application\Endpoints\Newsletter\Read;
 
-use Fortuneglobe\IceHawk\DomainRequestHandlers\GetRequestHandler;
-use Fortuneglobe\IceHawk\Interfaces\ServesGetRequestData;
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\Queries\ShowSubscriptionFormQuery;
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers\ShowSubscriptionFormQueryHandler;
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Services\NewsletterReadService;
+use IceHawk\Forms\FormId;
+use IceHawk\IceHawk\Interfaces\ProvidesReadRequestData;
+use PHPinDD\CqrsNewsletter\Application\Responses\Page;
+use PHPinDD\CqrsNewsletter\Bridges\AbstractGetRequestHandler;
+use PHPinDD\CqrsNewsletter\Env;
 
 /**
  * Class ShowSubscriptionFormRequestHandler
- *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read
+ * @package PHPinDD\CqrsNewsletter\Application\Endpoints\Subscription\Read
  */
-final class ShowSubscriptionFormRequestHandler extends GetRequestHandler
+final class ShowSubscriptionFormRequestHandler extends AbstractGetRequestHandler
 {
-	/**
-	 * @param ServesGetRequestData $request
-	 */
-	public function handle( ServesGetRequestData $request )
+	public function handleRequest( ProvidesReadRequestData $request, Env $env )
 	{
-		$newsletterReadService = new NewsletterReadService();
+		$session          = $env->getSession();
+		$subscriptionForm = $session->getForm( new FormId( 'subscriptionForm' ) );
 
-		$query   = new ShowSubscriptionFormQuery( $request );
-		$handler = new ShowSubscriptionFormQueryHandler( $newsletterReadService );
+		$subscriptionForm->renewToken();
 
-		$handler->handle( $query );
+		$data = [
+			'subscriptionForm' => $subscriptionForm,
+		];
+
+		(new Page( $env ))->render( 'Subscription/Read/Pages/SubscriptionForm.twig', $data );
 	}
 }

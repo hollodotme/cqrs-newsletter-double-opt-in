@@ -13,6 +13,7 @@ use IceHawk\IceHawk\Interfaces\ConfiguresIceHawk;
 use IceHawk\IceHawk\Routing\Patterns\Literal;
 use IceHawk\IceHawk\Routing\ReadRoute;
 use PHPinDD\CqrsNewsletter\Application\Endpoints\Home\Read\StartRequestHandler;
+use PHPinDD\CqrsNewsletter\Application\Endpoints\Newsletter\Read\ShowSubscriptionFormRequestHandler;
 use PHPinDD\CqrsNewsletter\Env;
 
 /**
@@ -37,7 +38,14 @@ final class IceHawkConfig implements ConfiguresIceHawk
 	public function getReadRoutes()
 	{
 		return [
-			new ReadRoute( new Literal( '/' ), new StartRequestHandler( $this->env ) ),
+			new ReadRoute(
+				new Literal( '/' ),
+				new StartRequestHandler( $this->env )
+			),
+			new ReadRoute(
+				new Literal( '/newsletter/subscription-form' ),
+				new ShowSubscriptionFormRequestHandler( $this->env )
+			),
 		];
 	}
 

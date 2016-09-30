@@ -16,7 +16,7 @@ use PHPinDD\CqrsNewsletter\Responses\Page;
 /**
  * Class ShowSubscriptionInitializedQueryHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\QueryHandlers
  */
 final class ShowSubscriptionInitializedQueryHandler
 {
@@ -45,7 +45,7 @@ final class ShowSubscriptionInitializedQueryHandler
 			$subscription = $this->newsletterReadService->findSubscriptionById( $subscriptionId );
 
 			$page = new Page(
-				'Newsletter/Read/Pages/SubscriptionInitialized.twig',
+				'Subscription/Read/Pages/SubscriptionInitialized.twig',
 				[
 					'subscription' => $subscription,
 				]

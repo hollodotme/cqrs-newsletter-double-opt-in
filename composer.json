@@ -19,6 +19,7 @@
 		"icehawk/icehawk": "2.0.0-rc5",
 		"icehawk/forms": "^1.0",
 		"icehawk/session": "^1.0",
+		"icehawk/pubsub": "^1.0",
 		"twig/twig": "@stable"
 	},
 	"autoload": {

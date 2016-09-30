@@ -13,7 +13,7 @@ use PHPinDD\CqrsNewsletter\Responses\Page;
 /**
  * Class ShowSubscriptionFormQueryHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\QueryHandlers
  */
 final class ShowSubscriptionFormQueryHandler
 {
@@ -43,7 +43,7 @@ final class ShowSubscriptionFormQueryHandler
 		}
 
 		$page = new Page(
-			'Newsletter/Read/Pages/SubscriptionForm.twig',
+			'Subscription/Read/Pages/SubscriptionForm.twig',
 			[
 				'feedback' => $feedback,
 			]

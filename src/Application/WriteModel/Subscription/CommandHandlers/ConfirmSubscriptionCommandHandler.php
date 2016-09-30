@@ -18,7 +18,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\Commands\ConfirmSubscription
 /**
  * Class ConfirmSubscriptionCommandHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Write\CommandHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Write\CommandHandlers
  */
 final class ConfirmSubscriptionCommandHandler
 {

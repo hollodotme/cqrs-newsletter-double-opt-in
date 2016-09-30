@@ -14,7 +14,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers\ShowSubscriptio
 /**
  * Class ShowSubscriptionConfirmedRequestHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read
  */
 final class ShowSubscriptionConfirmedRequestHandler extends GetRequestHandler
 {

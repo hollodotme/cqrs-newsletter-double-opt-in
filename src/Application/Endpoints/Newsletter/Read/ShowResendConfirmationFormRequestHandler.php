@@ -15,7 +15,7 @@ use PHPinDD\CqrsNewsletter\Domains\Newsletter\Services\NewsletterReadService;
 /**
  * Class ShowResendConfirmationFormRequestHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read
  */
 final class ShowResendConfirmationFormRequestHandler extends GetRequestHandler
 {

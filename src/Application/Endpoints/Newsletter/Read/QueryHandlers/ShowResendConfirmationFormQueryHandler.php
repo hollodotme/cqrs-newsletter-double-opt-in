@@ -13,7 +13,7 @@ use PHPinDD\CqrsNewsletter\Responses\Page;
 /**
  * Class ShowResendConfirmationFormQueryHandler
  *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter\Read\QueryHandlers
+ * @package PHPinDD\CqrsNewsletter\Domains\Subscription\Read\QueryHandlers
  */
 final class ShowResendConfirmationFormQueryHandler
 {
@@ -43,7 +43,7 @@ final class ShowResendConfirmationFormQueryHandler
 		}
 
 		$page = new Page(
-			'Newsletter/Read/Pages/ResendConfirmationForm.twig',
+			'Subscription/Read/Pages/ResendConfirmationForm.twig',
 			[
 				'feedback' => $feedback,
 			]

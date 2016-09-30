@@ -1,45 +1,30 @@
 <?php
 /**
- *
  * @author h.woltersdorf
  */
 
-namespace PHPinDD\CqrsNewsletter\Domains\Newsletter;
+namespace PHPinDD\CqrsNewsletter\Application\WriteModel\Subscription;
 
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\AddingSubscriptionFailed;
+use PHPinDD\CqrsNewsletter\Application\Types\Subscription;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\SubscriptionNotFound;
 use PHPinDD\CqrsNewsletter\Domains\Newsletter\Exceptions\UpdatingSubscriptionStatusFailed;
-use PHPinDD\CqrsNewsletter\Domains\Newsletter\Interfaces\SubscriptionInterface;
+use PHPinDD\CqrsNewsletter\Infrastructure\MySqlManager;
 
 /**
  * Class SubscriptionRepository
- *
- * @package PHPinDD\CqrsNewsletter\Domains\Newsletter
+ * @package PHPinDD\CqrsNewsletter\Application\WriteModel\Subscription
  */
 final class SubscriptionRepository
 {
-	/** @var \PDO */
+	/** @var MySqlManager */
 	private $dbManager;
 
-	public function __construct()
+	public function __construct( MySqlManager $mySqlManager )
 	{
-		$this->dbManager = new \PDO(
-			'mysql:host=localhost;port=3306;dbname=newsletter',
-			'root', 'vivi0911',
-			[
-				\PDO::ATTR_CURSOR                   => \PDO::CURSOR_FWDONLY,
-				\PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
-				\PDO::MYSQL_ATTR_INIT_COMMAND       => "SET CHARACTER SET utf8",
-			]
-		);
+		$this->dbManager = $mySqlManager;
 	}
 
-	/**
-	 * @param SubscriptionInterface $subscription
-	 *
-	 * @throws AddingSubscriptionFailed
-	 */
-	public function add( SubscriptionInterface $subscription )
+	public function add( Subscription $subscription )
 	{
 		$this->dbManager->beginTransaction();
 
@@ -50,8 +35,8 @@ final class SubscriptionRepository
 				 VALUES (:subscriptionId, :email, :status)",
 				[
 					'subscriptionId' => $subscription->getSubscriptionId()->toString(),
-					'email'          => $subscription->getEmail(),
-					'status'         => $subscription->getStatus()
+					'email'          => $subscription->getEmail()->toString(),
+					'status'         => $subscription->getStatus(),
 				]
 			);
 
@@ -61,21 +46,15 @@ final class SubscriptionRepository
 		{
 			$this->dbManager->rollBack();
 
-			throw new AddingSubscriptionFailed( $e->getMessage(), 0, $e );
+			throw $e;
 		}
 	}
 
-	/**
-	 * @param string $query
-	 * @param array  $params
-	 *
-	 * @return \PDOStatement
-	 */
-	private function queryPrepared( $query, array $params = [ ] )
+	private function queryPrepared( string $query, array $params = [] ) : \PDOStatement
 	{
 		$statement = $this->dbManager->prepare( $query );
 
-		if ( !$statement->execute( $params ?: null ) )
+		if ( !$statement->execute( $params ? : null ) )
 		{
 			$errorInfo    = $statement->errorInfo();
 			$errorMessage = $errorInfo[1] . ': ' . $errorInfo[2];
@@ -91,6 +70,32 @@ final class SubscriptionRepository
 		}
 
 		return $statement;
+	}
+
+	public function update( Subscription $subscription )
+	{
+		$this->dbManager->beginTransaction();
+
+		try
+		{
+			$this->queryPrepared(
+				"UPDATE subscriptions SET status = :status 
+				 WHERE subscriptionId = :subscriptionId 
+				 LIMIT 1",
+				[
+					'subscriptionId' => $subscription->getSubscriptionId()->toString(),
+					'status'         => $subscription->getStatus(),
+				]
+			);
+
+			$this->dbManager->commit();
+		}
+		catch ( \PDOException $e )
+		{
+			$this->dbManager->rollBack();
+
+			throw new UpdatingSubscriptionStatusFailed( $e->getMessage(), 0, $e );
+		}
 	}
 
 	/**
@@ -166,32 +171,4 @@ final class SubscriptionRepository
 		}
 	}
 
-	/**
-	 * @param SubscriptionInterface $subscription
-	 *
-	 * @throws UpdatingSubscriptionStatusFailed
-	 */
-	public function update( SubscriptionInterface $subscription )
-	{
-		$this->dbManager->beginTransaction();
-
-		try
-		{
-			$this->queryPrepared(
-				"UPDATE subscriptions SET status = :status WHERE subscriptionId = :subscriptionId LIMIT 1",
-				[
-					'subscriptionId' => $subscription->getSubscriptionId()->toString(),
-					'status'         => $subscription->getStatus(),
-				]
-			);
-
-			$this->dbManager->commit();
-		}
-		catch ( \PDOException $e )
-		{
-			$this->dbManager->rollBack();
-
-			throw new UpdatingSubscriptionStatusFailed( $e->getMessage(), 0, $e );
-		}
-	}
 }
